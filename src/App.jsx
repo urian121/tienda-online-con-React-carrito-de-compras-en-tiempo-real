@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import ProductsList from "./components/ProductsList";
+import Navbar from "./components/Navbar";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Función para obtener productos
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("/json/products.json");
+
+      // La respuesta es directamente un array de productos
+      const fetchedProducts = response.data;
+
+      if (Array.isArray(fetchedProducts)) {
+        setProducts(fetchedProducts);
+      } else {
+        console.error("Error: La respuesta no contiene productos válidos.");
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Navbar />
+      <div className="container border">
+        <div className="row justify-content-center">
+          <div className="col-md-12">
+            <h1 className="text-center">Lista de Productos</h1>
+          </div>
+        </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : products.length > 0 ? (
+          <ProductsList products={products} />
+        ) : (
+          <p>No hay productos.</p>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -12,3 +12,11 @@ Ejecuta el siguiente comando para crear un proyecto con Vite:
 
 ```bash
 npm create vite@latest ecommerce --template react
+
+
+- npm install zustand
+- npm install axios
+
+
+https://react-shopping-cart-67954.firebaseapp.com/
+https://reactjsexample.com/a-simple-ecommerce-cart-application-with-react/
