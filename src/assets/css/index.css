@@ -49,3 +49,18 @@ p strong {
   font-size: 13px;
   color: #444;
 }
+.cart-badge{
+  border: none;
+  background-color: #ff9c08 !important;
+}
+.card img{
+  -webkit-mask-image: linear-gradient(black 80%, transparent);
+  mask-image: linear-gradient(black 80%, transparent);
+/*  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: transform 0.5s ease;*/
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductsList from "./components/ProductsList";
-import Navbar from "./components/Navbar";
+import Nav from "./components/Nav";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      <Nav />
       <div className="container border">
         <div className="row justify-content-center">
           <div className="col-md-12">
