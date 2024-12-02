@@ -1,7 +1,8 @@
-const MyCart = () => {
+const MyCart = ({ toggleOffcanvas }) => {
   return (
     <button
       type="button"
+      onClick={toggleOffcanvas}
       className="btn cart-badge position-relative ms-auto me-3"
     >
       <i className="bi bi-bag-heart"></i>
