@@ -34,7 +34,7 @@ const ProductsList = ({ products }) => {
                   {product.availableSizes.join(", ")}
                 </p>
                 <button className="btn btn-cart w-100 mt-auto">
-                  Agregar al carrito <i className="bi bi-cart-plus"></i>
+                  Agregar al carrito &nbsp; <i className="bi bi-cart-plus"></i>
                 </button>
               </div>
             </div>
