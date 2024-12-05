@@ -1,4 +1,4 @@
-const MyCart = ({ toggleOffcanvas }) => {
+const MyCart = ({ toggleOffcanvas, getTotalProducts }) => {
   return (
     <button
       type="button"
@@ -7,7 +7,8 @@ const MyCart = ({ toggleOffcanvas }) => {
     >
       <i className="bi bi-bag-heart"></i>
       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        3<span className="visually-hidden">productos en el carrito</span>
+        {getTotalProducts()}
+        <span className="visually-hidden">productos en el carrito</span>
       </span>
     </button>
   );

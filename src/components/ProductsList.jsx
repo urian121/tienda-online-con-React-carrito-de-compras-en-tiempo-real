@@ -1,4 +1,4 @@
-const ProductsList = ({ products }) => {
+const ProductsList = ({ products, addToCart }) => {
   return (
     <div className="container my-5">
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -33,7 +33,10 @@ const ProductsList = ({ products }) => {
                   <strong>Tamaños disponibles:</strong>{" "}
                   {product.availableSizes.join(", ")}
                 </p>
-                <button className="btn btn-cart w-100 mt-auto">
+                <button
+                  className="btn btn-cart w-100 mt-auto"
+                  onClick={() => addToCart(product)}
+                >
                   Agregar al carrito &nbsp; <i className="bi bi-cart-plus"></i>
                 </button>
               </div>

@@ -71,8 +71,8 @@ p strong {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Gris oscuro con opacidad */
-  z-index: 1040; /* Asegura que esté detrás del offcanvas */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040; 
 }
 
 /* Transición para el offcanvas */
@@ -98,7 +98,7 @@ p strong {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   transition: background-color 0.3s ease-in-out;
-  z-index: 1040; /* Asegura que esté detrás del offcanvas */
+  z-index: 1040; 
   display: none;
 }
 
@@ -164,4 +164,7 @@ p strong {
 }
 h5{
   width: 100% !important;
+}
+.border-radius-5{
+  border-radius: 5px !important;
 }

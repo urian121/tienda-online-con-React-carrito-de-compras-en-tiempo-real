@@ -1,7 +1,7 @@
 import logo from "../assets/imgs/logo.png";
 import MyCart from "./MyCart";
 
-const Nav = ({ toggleOffcanvas }) => {
+const Nav = ({ toggleOffcanvas, getTotalProducts }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5 custom-navbar fixed-top w-100">
       <div className="container-fluid">
@@ -40,7 +40,10 @@ const Nav = ({ toggleOffcanvas }) => {
               <a className="nav-link">Contacto</a>
             </li>
           </ul>
-          <MyCart toggleOffcanvas={toggleOffcanvas} />
+          <MyCart
+            toggleOffcanvas={toggleOffcanvas}
+            getTotalProducts={getTotalProducts}
+          />
         </div>
       </div>
     </nav>
