@@ -2,7 +2,7 @@ import logo from "../assets/imgs/logo.png";
 import MyCart from "./MyCart";
 import { CiMenuFries } from "react-icons/ci";
 
-const Nav = ({ toggleOffcanvas, getTotalProducts }) => {
+const Nav = ({ toggleOffcanvas, getTotalProducts, balanceo }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5 custom-navbar fixed-top w-100">
       <div className="container-fluid">
@@ -44,6 +44,7 @@ const Nav = ({ toggleOffcanvas, getTotalProducts }) => {
           <MyCart
             toggleOffcanvas={toggleOffcanvas}
             getTotalProducts={getTotalProducts}
+            balanceo={balanceo}
           />
         </div>
       </div>

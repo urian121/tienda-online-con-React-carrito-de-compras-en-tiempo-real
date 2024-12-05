@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import ProductsList from "./components/ProductsList";
 import Nav from "./components/Nav";
 import SidebarOffCanvas from "./components/SidebarOffCanvas";
@@ -7,6 +7,7 @@ import useFetch from "./hooks/useFetch"; // Importar el custom hook
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [cart, setCart] = useState([]);
+  const [balanceo, setBalanceo] = useState(false);
 
   // Usar el hook useFetch para obtener los productos
   const { data: products, loading, error } = useFetch("/json/products.json");
@@ -65,12 +66,25 @@ const App = () => {
     return uniqueProducts.length;
   };
 
+  // Calculamos el total de productos con useMemo para evitar recalcular en cada renderizado
+  const totalProductsBalanceo = useMemo(() => getTotalProducts(), [cart]);
+
+  // UseEffect para manejar el estado de balanceo
+  useEffect(() => {
+    if (totalProductsBalanceo > 0) {
+      setBalanceo(true);
+      setTimeout(() => {
+        setBalanceo(false); // Remueve la clase 'balanceo' después de 1 segundo
+      }, 1000);
+    }
+  }, [totalProductsBalanceo]); // Se ejecuta cuando el total de productos cambia
+
   return (
     <>
       <Nav
-        isVisible={isVisible}
         toggleOffcanvas={toggleOffcanvas}
         getTotalProducts={getTotalProducts}
+        balanceo={balanceo}
       />
       <div className="container border">
         <div className="row justify-content-center">
