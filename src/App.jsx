@@ -19,6 +19,9 @@ const App = () => {
   // Función para agregar un producto al carrito
   const addToCart = (product) => {
     setCart((prevCart) => {
+      // Alternar la visibilidad del offcanvas al agregar un producto al carrito
+      setIsVisible(true);
+
       // Verificamos si el producto ya está en el carrito
       const existingProduct = prevCart.find((item) => item.id === product.id);
 

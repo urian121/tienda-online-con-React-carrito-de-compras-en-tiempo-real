@@ -1,5 +1,6 @@
 import logo from "../assets/imgs/logo.png";
 import MyCart from "./MyCart";
+import { CiMenuFries } from "react-icons/ci";
 
 const Nav = ({ toggleOffcanvas, getTotalProducts }) => {
   return (
@@ -9,7 +10,7 @@ const Nav = ({ toggleOffcanvas, getTotalProducts }) => {
           <img src={logo} alt="logo" style={{ width: "100px" }} />
         </a>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler border-0"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -17,7 +18,7 @@ const Nav = ({ toggleOffcanvas, getTotalProducts }) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <CiMenuFries className="menu-icon text-white" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">

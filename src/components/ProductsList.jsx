@@ -1,3 +1,4 @@
+import { BsCartPlus } from "react-icons/bs";
 const ProductsList = ({ products, addToCart }) => {
   return (
     <div className="container my-5">
@@ -37,7 +38,7 @@ const ProductsList = ({ products, addToCart }) => {
                   className="btn btn-cart w-100 mt-auto"
                   onClick={() => addToCart(product)}
                 >
-                  Agregar al carrito &nbsp; <i className="bi bi-cart-plus"></i>
+                  Agregar al carrito &nbsp; <BsCartPlus />
                 </button>
               </div>
             </div>

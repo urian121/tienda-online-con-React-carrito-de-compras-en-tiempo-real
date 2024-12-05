@@ -65,6 +65,13 @@ p strong {
   transition: transform 0.5s ease;*/
 }
 
+/** Mostrar el backdrop */
+/*
+.offcanvas-backdrop.show {
+  display: block;
+}
+*/
+
 .offcanvas-backdrop.show {
   position: fixed;
   top: 0;
@@ -102,15 +109,10 @@ p strong {
   display: none;
 }
 
-.offcanvas-backdrop.show {
-  display: block;
-}
-
-
 /**Detalles del carrito de compra */
 .title-product{
     font-size: 15px !important;
-    color: #333;
+    color: #5b5b5b;
     font-weight: bold;
 }
 .detalles-product{
@@ -145,13 +147,30 @@ p strong {
   }
 }
 
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.menu-icon{
+  font-size: 30px;
+}
+.menu-icon:hover{
+  color: #ff9c08 !important;
+}
+.color-gris{
+  color: #4f4f4f !important;
+}
+.precio{
+  color: #464646 ! important;
+}
 .bi-bag-heart{
   font-size: 18px;
 }
 
 .offcanvas-body {
   background-color: #f8f9fa;
-  max-height: 60vh; 
+  max-height: 65vh; 
   overflow-y: auto; 
 }
 .btn-comprar{
