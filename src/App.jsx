@@ -5,6 +5,8 @@ import Nav from "./components/Nav";
 import SidebarOffCanvas from "./components/SidebarOffCanvas";
 import useFetch from "./hooks/useFetch"; // Importar el custom hook
 
+import TitleTypeWriter from "./components/TitleTypeWriter";
+
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [cart, setCart] = useState([]);
@@ -90,7 +92,7 @@ const App = () => {
       <div className="container mt-5 mb-5">
         <div className="row justify-content-center mt-5">
           <div className="col-md-12">
-            <h1 className="fw-bold text-center">Lista de Productos</h1>
+            <TitleTypeWriter />
           </div>
         </div>
         {loading ? (

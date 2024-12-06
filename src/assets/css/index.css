@@ -202,3 +202,13 @@ h5{
     transform: scale(0.9);
   }
 }
+
+
+.delete-product{
+  background-color:#ffe4e4 !important;
+}
+.delete-product:hover{
+  cursor: pointer;
+  color: #ff9c08 !important;
+  font-weight: bold !important;
+}

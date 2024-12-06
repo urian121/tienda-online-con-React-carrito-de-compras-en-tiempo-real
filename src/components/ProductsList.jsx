@@ -19,7 +19,7 @@ const ProductsList = ({ products, addToCart }) => {
                 )}
               </div>
               <div className="card-body d-flex flex-column">
-                <h5 className="card-title mb-5">{product.title}</h5>
+                <h5 className="card-title mb-4">{product.title}</h5>
                 {/* <p className="card-text">{product.description}</p> */}
                 <div className="d-flex justify-content-between align-items-center mt-auto">
                   <p className="mb-0">
@@ -30,10 +30,26 @@ const ProductsList = ({ products, addToCart }) => {
                     <strong>Cuotas:</strong> {product.installments} meses
                   </p>
                 </div>
-                <p>
-                  <strong>Tamaños disponibles:</strong>{" "}
-                  {product.availableSizes.join(", ")}
+                <p style={{ marginBottom: "0.2rem !important" }}>
+                  <strong>Tamaños disponibles:</strong>
                 </p>
+                <div className="d-flex gap-2 mb-3">
+                  {product.availableSizes.map((size, index) => (
+                    <span
+                      key={index}
+                      className="border border-dark rounded-circle text-center d-inline-flex justify-content-center align-items-center"
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                        fontSize: "10px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {size}
+                    </span>
+                  ))}
+                </div>
+
                 <button
                   className="btn btn-cart w-100 mt-auto"
                   onClick={() => addToCart(product)}

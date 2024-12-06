@@ -1,4 +1,5 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaWhatsapp } from "react-icons/fa";
 
 const SidebarOffCanvas = ({
   isVisible,
@@ -8,6 +9,15 @@ const SidebarOffCanvas = ({
 }) => {
   const calculateSubtotal = () => {
     return cart.reduce((acc, p) => acc + p.price * p.quantity, 0);
+  };
+
+  const generateWhatsAppMessage = () => {
+    let message = "Hola Urian, saludos. Quiero este pedido:\n\n";
+    cart.forEach((product) => {
+      message += `Producto: ${product.title}\nCantidad: ${product.quantity}\nPrecio: $${product.price}\n\n`;
+    });
+    message += `Subtotal: $${calculateSubtotal().toFixed(2)}`;
+    return encodeURIComponent(message);
   };
 
   return (
@@ -66,7 +76,7 @@ const SidebarOffCanvas = ({
                   <strong className="fs-4 precio">${productCart.price}</strong>
                 </span>
                 <button
-                  className="btn btn-danger mt-3"
+                  className="btn mt-3 delete-product"
                   onClick={() => removeFromCart(productCart.id)}
                 >
                   <RiDeleteBin6Line />
@@ -86,7 +96,16 @@ const SidebarOffCanvas = ({
             </span>
           </h5>
         </div>
-        <button className="btn btn-comprar w-100">Finalizar compra</button>
+        {cart.length > 0 && (
+          <a
+            href={`https://api.whatsapp.com/send?phone=+573213872648&text=${generateWhatsAppMessage()}`}
+            className="btn btn-comprar w-100"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaWhatsapp /> &nbsp; Enviar pedido por WhatsApp
+          </a>
+        )}
       </div>
     </div>
   );
