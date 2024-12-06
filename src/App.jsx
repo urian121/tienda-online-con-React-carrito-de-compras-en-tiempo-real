@@ -90,13 +90,10 @@ const App = () => {
         balanceo={balanceo}
       />
       <div className="container mt-5 mb-5">
-        <div className="row justify-content-center mt-5">
-          <div className="col-md-12">
-            <TitleTypeWriter />
-          </div>
-        </div>
+        <TitleTypeWriter />
+
         {loading ? (
-          <p>Cargando productos...</p>
+          <p className="text-center">Cargando productos...</p>
         ) : error ? (
           <p>Error cargando productos: {error.message}</p>
         ) : products && products.length > 0 ? (
