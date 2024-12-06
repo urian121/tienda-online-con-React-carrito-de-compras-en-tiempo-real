@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import ProductsList from "./components/ProductsList";
+import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import SidebarOffCanvas from "./components/SidebarOffCanvas";
 import useFetch from "./hooks/useFetch"; // Importar el custom hook
@@ -86,10 +87,10 @@ const App = () => {
         getTotalProducts={getTotalProducts}
         balanceo={balanceo}
       />
-      <div className="container border">
-        <div className="row justify-content-center">
+      <div className="container mt-5 mb-5">
+        <div className="row justify-content-center mt-5">
           <div className="col-md-12">
-            <h1 className="text-center">Lista de Productos</h1>
+            <h1 className="fw-bold text-center">Lista de Productos</h1>
           </div>
         </div>
         {loading ? (
@@ -120,6 +121,8 @@ const App = () => {
           removeFromCart={removeFromCart}
         />
       )}
+
+      <Footer />
     </>
   );
 };
