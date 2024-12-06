@@ -32,7 +32,7 @@ const SidebarOffCanvas = ({
     >
       <div className="offcanvas-header">
         <h5
-          className="offcanvas-title text-capitalize text-center fw-bold"
+          className="offcanvas-title text-uppercase text-center fw-bold"
           id="offcanvasRightLabel"
         >
           Mi carrito de compras
