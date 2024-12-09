@@ -228,3 +228,23 @@ h5{
   color: #ff9c08 !important;
   font-weight: bold !important;
 }
+.select-talla{
+  background-color: #333 !important;
+  color: #fff !important;
+  border: none;
+}
+.size-button {
+  width: 40px;  /* Ajusta el tamaño del círculo */
+  height: 40px; /* Asegura que sea un círculo perfecto */
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
+  line-height: 40px; /* Centra el texto verticalmente */
+}
+
+/* Agregar el efecto zoom al pasar el ratón sobre la imagen */
+.custom-card img {
+  transition: transform 0.3s ease-in-out; /* Transición suave */
+}
+
+.custom-card:hover img {
+  transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el ratón */
+}

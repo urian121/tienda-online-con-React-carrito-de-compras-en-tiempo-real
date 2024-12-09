@@ -3,6 +3,7 @@ import ProductsList from "./components/ProductsList";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import SidebarOffCanvas from "./components/SidebarOffCanvas";
+import SizeFilter from "./components/SizeFilter";
 import useFetch from "./hooks/useFetch"; // Importar el custom hook
 import TitleTypeWriter from "./components/TitleTypeWriter";
 
@@ -10,6 +11,7 @@ const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [cart, setCart] = useState([]);
   const [balanceo, setBalanceo] = useState(false);
+  const [selectedSizes, setSelectedSizes] = useState([]);
 
   // Usar el hook useFetch para obtener los productos
   const { data: products, loading, error } = useFetch("/json/products.json");
@@ -81,6 +83,31 @@ const App = () => {
     }
   }, [totalProductsBalanceo]); // Se ejecuta cuando el total de productos cambia
 
+  // Filtrar productos por talla seleccionada
+  const filteredProducts = useMemo(() => {
+    if (!selectedSizes.length) return products; // Si no hay tallas seleccionadas, devolver todos los productos
+
+    return products.filter(
+      (product) =>
+        selectedSizes.some((size) => product.availableSizes.includes(size)) // Filtrar si el producto tiene alguna talla seleccionada
+    );
+  }, [selectedSizes, products]); // Dependemos tanto de `selectedSizes` como de `products`
+
+  // Obtener el total de productos filtrados usando useMemo
+  const totalFiltered = useMemo(() => {
+    // Si no hay filtros aplicados, mostrar el total de productos
+    if (selectedSizes.length === 0) {
+      return products?.length || 0; // Devuelve 0 si no hay productos
+    }
+    // Si hay filtros, mostrar el total de productos filtrados
+    return filteredProducts.length;
+  }, [selectedSizes, filteredProducts, products]);
+
+  // Manejar la actualización de las tallas seleccionadas
+  const handleFilter = (newSizes) => {
+    setSelectedSizes(newSizes); // Actualizamos el estado en App
+  };
+
   return (
     <>
       <Nav
@@ -91,15 +118,30 @@ const App = () => {
       <div className="container mt-5 mb-5">
         <TitleTypeWriter />
 
-        {loading ? (
-          <p className="text-center">Cargando productos...</p>
-        ) : error ? (
-          <p>Error cargando productos: {error.message}</p>
-        ) : products && products.length > 0 ? (
-          <ProductsList products={products} addToCart={addToCart} />
-        ) : (
-          <p>No hay productos.</p>
-        )}
+        <div className="row">
+          {/* Columna del Filtro */}
+          <div className="col-md-2">
+            <SizeFilter
+              products={products}
+              selectedSizes={selectedSizes}
+              onFilter={handleFilter}
+              totalFiltered={totalFiltered}
+            />
+          </div>
+
+          {/* Columna de Productos */}
+          <div className="col-md-10">
+            {loading ? (
+              <p className="text-center">Cargando productos...</p>
+            ) : error ? (
+              <p>Error cargando productos: {error.message}</p>
+            ) : filteredProducts.length > 0 ? (
+              <ProductsList products={filteredProducts} addToCart={addToCart} />
+            ) : (
+              <p>No hay productos.</p>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Fondo de superposición con animación */}
