@@ -4,8 +4,7 @@
 
 ## Resultado final
 
-![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/refs/heads/master/guia-navegacion-con-react-router-dom.gif)
-
+![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/refs/heads/master/tienda-online-con-carrito-de-compra-en-react.gif)
 
 ### Características principales:
 - Agregar productos al carrito.
