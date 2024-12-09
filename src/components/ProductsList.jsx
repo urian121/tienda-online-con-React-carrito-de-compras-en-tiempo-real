@@ -37,13 +37,7 @@ const ProductsList = ({ products, addToCart }) => {
                   {product.availableSizes.map((size, index) => (
                     <span
                       key={index}
-                      className="border border-dark rounded-circle text-center d-inline-flex justify-content-center align-items-center"
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        fontSize: "10px",
-                        fontWeight: "bold",
-                      }}
+                      className="border border-dark rounded-circle text-center d-inline-flex justify-content-center align-items-center tallas"
                     >
                       {size}
                     </span>

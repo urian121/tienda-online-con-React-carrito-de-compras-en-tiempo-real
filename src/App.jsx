@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import SidebarOffCanvas from "./components/SidebarOffCanvas";
 import useFetch from "./hooks/useFetch"; // Importar el custom hook
-
 import TitleTypeWriter from "./components/TitleTypeWriter";
 
 const App = () => {
