@@ -1,4 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
+import LoadingBar from "react-top-loading-bar";
+
 import ProductsList from "./components/ProductsList";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
@@ -12,6 +14,7 @@ const App = () => {
   const [cart, setCart] = useState([]);
   const [balanceo, setBalanceo] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const ref = useRef(null);
 
   // Usar el hook useFetch para obtener los productos
   const { data: products, loading, error } = useFetch("/json/products.json");
@@ -106,6 +109,11 @@ const App = () => {
   // Manejar la actualización de las tallas seleccionadas
   const handleFilter = (newSizes) => {
     setSelectedSizes(newSizes); // Actualizamos el estado en App
+
+    // Simula un pequeño tiempo de carga para finalizar la barra
+    setTimeout(() => {
+      ref.current.complete(); // Finaliza la barra de carga
+    }, 50);
   };
 
   return (
@@ -115,6 +123,7 @@ const App = () => {
         getTotalProducts={getTotalProducts}
         balanceo={balanceo}
       />
+
       <div className="container mt-5 mb-5">
         <TitleTypeWriter />
 
@@ -131,6 +140,7 @@ const App = () => {
 
           {/* Columna de Productos */}
           <div className="col-md-10">
+            <LoadingBar color="#ff9c08" ref={ref} shadow={true} />
             {loading ? (
               <p className="text-center">Cargando productos...</p>
             ) : error ? (
