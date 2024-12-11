@@ -1,7 +1,10 @@
 import { useMemo } from "react";
+import useSizeFilterStore from "../store/sizeFilterStore";
 
-const SizeFilter = ({ products, selectedSizes, onFilter, totalFiltered }) => {
-  // Si products es null o está vacío, devolvemos un arreglo vacío para evitar errores
+const SizeFilter = ({ products, totalFiltered }) => {
+  // Si products es null o está vacío, devolvemos un arreglo vacío para evitar error
+  const { selectedSizes, handleFilter } = useSizeFilterStore();
+
   const sizes = useMemo(() => {
     if (!products || products.length === 0) return [];
 
@@ -16,7 +19,7 @@ const SizeFilter = ({ products, selectedSizes, onFilter, totalFiltered }) => {
     const newSizes = isSelected
       ? selectedSizes.filter((item) => item !== size) // Eliminar talla
       : [...selectedSizes, size]; // Agregar talla
-    onFilter(newSizes); // Pasar el array de tallas seleccionadas al padre
+    handleFilter(newSizes); // Pasar el array de tallas seleccionadas al padre
   };
 
   return (

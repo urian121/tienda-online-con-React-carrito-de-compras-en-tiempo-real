@@ -1,12 +1,13 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaWhatsapp } from "react-icons/fa";
+import useCartStore from "../store/cartStore";
+import useOffcanvasStore from "../store/offcanvasStore";
 
-const SidebarOffCanvas = ({
-  isVisible,
-  toggleOffcanvas,
-  cart,
-  removeFromCart,
-}) => {
+const SidebarOffCanvas = () => {
+  // Acceder al store de cart y usar sus funciones
+  const { cart, removeFromCart } = useCartStore();
+  const { isVisible, toggleOffcanvas } = useOffcanvasStore();
+
   const calculateSubtotal = () => {
     return cart.reduce((acc, p) => acc + p.price * p.quantity, 0);
   };
@@ -40,7 +41,7 @@ const SidebarOffCanvas = ({
         <button
           type="button"
           className="btn-close"
-          onClick={toggleOffcanvas}
+          onClick={() => toggleOffcanvas(!true)}
           aria-label="Close"
         ></button>
       </div>

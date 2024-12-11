@@ -1,5 +1,9 @@
+import useCartStore from "../store/cartStore";
 import { BsCartPlus } from "react-icons/bs";
-const ProductsList = ({ products, addToCart }) => {
+
+const ProductsList = ({ products }) => {
+  // Usa el store directamente para acceder a addToCart
+  const { addToCart } = useCartStore();
   return (
     <div className="container my-5">
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -20,7 +24,6 @@ const ProductsList = ({ products, addToCart }) => {
               </div>
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title mb-4">{product.title}</h5>
-                {/* <p className="card-text">{product.description}</p> */}
                 <div className="d-flex justify-content-between align-items-center mt-auto">
                   <p className="mb-0">
                     <strong>Precio:</strong> {product.currencyFormat}

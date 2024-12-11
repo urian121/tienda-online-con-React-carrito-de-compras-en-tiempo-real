@@ -1,5 +1,10 @@
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import LoadingBar from "react-top-loading-bar";
+import useCartStore from "./store/cartStore";
+import useOffcanvasStore from "./store/offcanvasStore";
+import useTotalStore from "./store/totalProductStore";
+import useBalanceStore from "./store/balanceStore";
+import useSizeFilterStore from "./store/sizeFilterStore";
 
 import ProductsList from "./components/ProductsList";
 import Footer from "./components/Footer";
@@ -10,81 +15,34 @@ import useFetch from "./hooks/useFetch"; // Importar el custom hook
 import TitleTypeWriter from "./components/TitleTypeWriter";
 
 const App = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [cart, setCart] = useState([]);
-  const [balanceo, setBalanceo] = useState(false);
-  const [selectedSizes, setSelectedSizes] = useState([]);
+  // Llama a `useCartStore` para acceder al estado del carrito y las funciones
+  const { cart } = useCartStore();
+  const { getTotalProducts } = useTotalStore();
+  const { toggleBalanceo } = useBalanceStore();
+  const { isVisible, toggleOffcanvas } = useOffcanvasStore();
+
+  // Referencia para usar con react-top-loading-bar
   const ref = useRef(null);
+  const { selectedSizes } = useSizeFilterStore();
 
   // Usar el hook useFetch para obtener los productos
   const { data: products, loading, error } = useFetch("/json/products.json");
 
-  // Función para alternar la visibilidad del offcanvas
-  const toggleOffcanvas = () => {
-    setIsVisible(!isVisible);
-  };
-
-  // Función para agregar un producto al carrito
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      // Alternar la visibilidad del offcanvas al agregar un producto al carrito
-      setIsVisible(true);
-
-      // Verificamos si el producto ya está en el carrito
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-
-      if (existingProduct) {
-        // Si el producto ya está, actualizamos la cantidad
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 } // Incrementamos la cantidad
-            : item
-        );
-      } else {
-        // Si no está, lo agregamos con una cantidad de 1
-        return [...prevCart, { ...product, quantity: 1 }];
-      }
-    });
-  };
-
-  // Función para eliminar un producto del carrito
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.map((product) =>
-        product.id === productId
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
-      );
-
-      // Eliminar producto si la cantidad es 0
-      return updatedCart.filter((product) => product.quantity > 0);
-    });
-  };
-
-  // Función para calcular el total de productos en el carrito
-  const getTotalProducts = () => {
-    // Filtrar los productos únicos por ID
-    const uniqueProducts = cart.filter(
-      (product, index, self) =>
-        index === self.findIndex((t) => t.id === product.id)
-    );
-
-    // Contar los productos únicos
-    return uniqueProducts.length;
-  };
-
-  // Calculamos el total de productos con useMemo para evitar recalcular en cada renderizado
-  const totalProductsBalanceo = useMemo(() => getTotalProducts(), [cart]);
-
   // UseEffect para manejar el estado de balanceo
   useEffect(() => {
-    if (totalProductsBalanceo > 0) {
-      setBalanceo(true);
-      setTimeout(() => {
-        setBalanceo(false); // Remueve la clase 'balanceo' después de 1 segundo
-      }, 1000);
+    if (cart.length > 0) {
+      const totalProductsBalanceo = getTotalProducts(cart); // Calcula los productos únicos
+      console.log("Se esta ejecutando");
+      // Si no está visible el carrito, lo abre y activa la animación de balanceo
+      if (!isVisible) {
+        toggleOffcanvas(true);
+      }
+
+      if (totalProductsBalanceo > 0) {
+        toggleBalanceo(true); // Activa la animación
+      }
     }
-  }, [totalProductsBalanceo]); // Se ejecuta cuando el total de productos cambia
+  }, [cart, getTotalProducts, toggleBalanceo, toggleOffcanvas]); // Escucha cambios en el carrito
 
   // Filtrar productos por talla seleccionada
   const filteredProducts = useMemo(() => {
@@ -106,23 +64,9 @@ const App = () => {
     return filteredProducts.length;
   }, [selectedSizes, filteredProducts, products]);
 
-  // Manejar la actualización de las tallas seleccionadas
-  const handleFilter = (newSizes) => {
-    setSelectedSizes(newSizes); // Actualizamos el estado en App
-
-    // Simula un pequeño tiempo de carga para finalizar la barra
-    setTimeout(() => {
-      ref.current.complete(); // Finaliza la barra de carga
-    }, 50);
-  };
-
   return (
     <>
-      <Nav
-        toggleOffcanvas={toggleOffcanvas}
-        getTotalProducts={getTotalProducts}
-        balanceo={balanceo}
-      />
+      <Nav />
 
       <div className="container mt-5 mb-5">
         <TitleTypeWriter />
@@ -130,47 +74,29 @@ const App = () => {
         <div className="row">
           {/* Columna del Filtro */}
           <div className="col-md-2">
-            <SizeFilter
-              products={products}
-              selectedSizes={selectedSizes}
-              onFilter={handleFilter}
-              totalFiltered={totalFiltered}
-            />
+            <SizeFilter products={products} totalFiltered={totalFiltered} />
           </div>
 
           {/* Columna de Productos */}
           <div className="col-md-10">
             <LoadingBar color="#ff9c08" ref={ref} shadow={true} />
             {loading ? (
-              <p className="text-center">Cargando productos...</p>
+              <h2 className="text-center">Cargando productos...</h2>
             ) : error ? (
-              <p>Error cargando productos: {error.message}</p>
+              <h2 className="text-center">
+                Error cargando productos: {error.message}
+              </h2>
             ) : filteredProducts.length > 0 ? (
-              <ProductsList products={filteredProducts} addToCart={addToCart} />
+              <ProductsList products={filteredProducts} />
             ) : (
-              <p>No hay productos.</p>
+              <p className="text-center">No hay productos.</p>
             )}
           </div>
         </div>
       </div>
 
-      {/* Fondo de superposición con animación */}
-      {isVisible && (
-        <div
-          className="offcanvas-backdrop show"
-          onClick={toggleOffcanvas}
-        ></div>
-      )}
-
-      {/* SidebarOffCanvas con animación */}
-      {isVisible && (
-        <SidebarOffCanvas
-          isVisible={isVisible}
-          toggleOffcanvas={toggleOffcanvas}
-          cart={cart}
-          removeFromCart={removeFromCart}
-        />
-      )}
+      {/* Mostrar el SidebarOffCanvas, carrito de compras */}
+      {isVisible && <SidebarOffCanvas />}
 
       <Footer />
     </>
