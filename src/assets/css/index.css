@@ -1,9 +1,6 @@
 body {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  height: auto;
   background: #eff2f6 !important;
-  overflow: auto;
-  width: 100%;
   color: #1c1a26;
   font-weight: 400;
 }
@@ -247,4 +244,12 @@ h5{
 
 .custom-card:hover img {
   transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el ratón */
+}
+
+
+@media (max-width: 492px) {
+  h1 {
+    font-size: 40px !important;
+    text-align: center;
+  }
 }
