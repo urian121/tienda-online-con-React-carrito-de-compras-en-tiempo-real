@@ -1,4 +1,5 @@
 import Typewriter from "typewriter-effect";
+import imgShopping from "../assets/imgs/shopping.png";
 
 const TitleTypeWriter = () => {
   return (
@@ -23,7 +24,7 @@ const TitleTypeWriter = () => {
       <div className="col-12 col-md-5 text-center">
         <img
           style={{ width: "350px", maxWidth: "100%" }}
-          src="/src/assets/imgs/shoppi.png"
+          src={imgShopping}
           alt="Ecommerce"
           className="img-fluid text-center px-3"
         />
