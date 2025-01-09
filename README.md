@@ -1,6 +1,6 @@
 # 🛒 Tienda Online con React: Carrito de Compras en Tiempo Real
 
-¿Quieres llevar tus habilidades de React al siguiente nivel? Este proyecto es una tienda online dinámica diseñada para enseñarte a construir un **ecommerce completo** desde cero. Utiliza herramientas modernas como **React**, **Zustand** y **Bootstrap** para crear una experiencia de usuario fluida y profesional.
+¿Quieres llevar tus habilidades de React al siguiente nivel? Este proyecto es una tienda online dinámica diseñada para enseñarte a construir un **ecommerce completo** desde cero. Utiliza herramientas modernas como **React JS**, **Zustand** y **Bootstrap** para crear una experiencia de usuario fluida y profesional.
 
 ## Resultado final
 
@@ -25,7 +25,7 @@
 - **[Axios](https://axios-http.com/):** Cliente HTTP para consumir APIs.
 - **[React Icons](https://react-icons.github.io/react-icons/):** Iconos personalizables para React.
 - **[Typewriter Effect](https://www.npmjs.com/package/typewriter-effect):** Efectos de texto animados para mejorar la experiencia visual.
-- **[loadingbars](https://klendi.github.io/react-top-loading-bar/): ** Efecto de loading bars para el filtro.
+- **[loadingbars](https://klendi.github.io/react-top-loading-bar/):** Efecto de loading bars para el filtro.
 
 ---
 

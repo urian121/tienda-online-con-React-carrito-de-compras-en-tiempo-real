@@ -16,10 +16,15 @@ const Footer = () => {
           <div className="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
             <p className="mb-0">
               &copy; 2024{" "}
-              <a href="/" className="text-white text-decoration-none">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.urianviera.com"
+                className="text-white text-decoration-none"
+              >
                 Urian Viera
               </a>{" "}
-              || Todos los derechos reservados
+              || Todos los derechos reservados.
             </p>
           </div>
           {/* Íconos Sociales */}

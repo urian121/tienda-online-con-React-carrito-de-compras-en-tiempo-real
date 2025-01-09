@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
-import LoadingBar from "react-top-loading-bar";
+import { useEffect, useMemo } from "react";
 import useCartStore from "./store/cartStore";
 import useOffcanvasStore from "./store/offcanvasStore";
 import useTotalStore from "./store/totalProductStore";
@@ -20,9 +19,6 @@ const App = () => {
   const { getTotalProducts } = useTotalStore();
   const { toggleBalanceo } = useBalanceStore();
   const { isVisible, toggleOffcanvas } = useOffcanvasStore();
-
-  // Referencia para usar con react-top-loading-bar
-  const ref = useRef(null);
   const { selectedSizes } = useSizeFilterStore();
 
   // Usar el hook useFetch para obtener los productos
@@ -42,7 +38,7 @@ const App = () => {
         toggleBalanceo(true); // Activa la animación
       }
     }
-  }, [cart, getTotalProducts, toggleBalanceo, toggleOffcanvas]); // Escucha cambios en el carrito
+  }, [cart, getTotalProducts, toggleBalanceo, toggleOffcanvas, isVisible]); // Escucha cambios en el carrito
 
   // Filtrar productos por talla seleccionada
   const filteredProducts = useMemo(() => {
@@ -79,7 +75,6 @@ const App = () => {
 
           {/* Columna de Productos */}
           <div className="col-md-10">
-            <LoadingBar color="#ff9c08" ref={ref} shadow={true} />
             {loading ? (
               <h2 className="text-center">Cargando productos...</h2>
             ) : error ? (

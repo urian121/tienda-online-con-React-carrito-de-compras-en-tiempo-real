@@ -29,7 +29,6 @@ const SidebarOffCanvas = () => {
       tabIndex="-1"
       id="offcanvasRight"
       aria-labelledby="offcanvasRightLabel"
-      style={{ marginTop: "59px" }}
     >
       <div className="offcanvas-header">
         <h5
@@ -74,7 +73,7 @@ const SidebarOffCanvas = () => {
                   <span className="fs-6 color-gris">
                     {productCart.quantity}x
                   </span>
-                  <strong className="fs-4 precio">${productCart.price}</strong>
+                  <strong className="fs-5 precio">${productCart.price}</strong>
                 </span>
                 <button
                   className="btn mt-3 delete-product"
@@ -93,7 +92,8 @@ const SidebarOffCanvas = () => {
           <h5 className="mb-5">
             <span className="fw-bold">SUBTOTAL:</span>
             <span className="fw-bold float-end px-2 fs-2">
-              ${calculateSubtotal().toFixed(2)}
+              <span style={{ color: "#ff9c08" }}>$</span>
+              {calculateSubtotal().toFixed(2)}
             </span>
           </h5>
         </div>

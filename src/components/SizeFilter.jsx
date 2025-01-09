@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+import LoadingBar from "react-top-loading-bar";
 import useSizeFilterStore from "../store/sizeFilterStore";
 
 const SizeFilter = ({ products, totalFiltered }) => {
-  // Si products es null o está vacío, devolvemos un arreglo vacío para evitar error
+  const ref = useRef(null); // Referencia para la barra de carga
   const { selectedSizes, handleFilter } = useSizeFilterStore();
 
   const sizes = useMemo(() => {
@@ -12,21 +13,27 @@ const SizeFilter = ({ products, totalFiltered }) => {
     return [...new Set(allSizes)].sort();
   }, [products]);
 
-  // Manejar el cambio de talla seleccionada
   const handleSizeClick = (size) => {
-    // Si la talla ya está seleccionada, la deseleccionamos; si no, la agregamos al array
+    ref.current.continuousStart(); // Inicia la barra de carga
+
     const isSelected = selectedSizes.includes(size);
     const newSizes = isSelected
-      ? selectedSizes.filter((item) => item !== size) // Eliminar talla
-      : [...selectedSizes, size]; // Agregar talla
-    handleFilter(newSizes); // Pasar el array de tallas seleccionadas al padre
+      ? selectedSizes.filter((item) => item !== size)
+      : [...selectedSizes, size];
+
+    // Simula una demora para completar la barra de carga (puedes enlazar esto a tus solicitudes)
+    setTimeout(() => {
+      handleFilter(newSizes); // Llama a la función de filtrado
+      ref.current.complete(); // Completa la barra de carga
+    }, 100); // Ajusta el tiempo según sea necesario
   };
 
   return (
     <div className="mt-5 p-3 mb-3 circle">
+      <LoadingBar color="#ff9c08" ref={ref} shadow={true} />
       <h5>
         Filtrar por Talla{" "}
-        <span className="fw-bold float-end">({totalFiltered})</span>{" "}
+        <span className="fw-bold float-end">({totalFiltered})</span>
       </h5>
       <div className="d-flex flex-wrap">
         {sizes.map((size) => (

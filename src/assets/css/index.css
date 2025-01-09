@@ -1,5 +1,5 @@
 body {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Poppins", sans-serif;
   background: #eff2f6 !important;
   color: #1c1a26;
   font-weight: 400;
@@ -23,6 +23,9 @@ body {
 .custom-card{
   border-radius: none !important;
   border: none ! important;
+}
+#offcanvasRight{
+  margin-top: 57px;
 }
 .btn-cart{
   border-radius: none ! important;
@@ -139,7 +142,7 @@ p strong {
   color: #ff9c08 !important;
 }
 .color-gris{
-  color: #4f4f4f !important;
+  color: #7d7d7d !important;
 }
 .precio{
   color: #464646 ! important;
