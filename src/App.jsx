@@ -28,17 +28,17 @@ const App = () => {
   useEffect(() => {
     if (cart.length > 0) {
       const totalProductsBalanceo = getTotalProducts(cart); // Calcula los productos únicos
-      console.log("Se esta ejecutando");
-      // Si no está visible el carrito, lo abre y activa la animación de balanceo
+      // Abre el carrito solo si no está visible
       if (!isVisible) {
         toggleOffcanvas(true);
       }
 
+      // Activa la animación si hay productos únicos
       if (totalProductsBalanceo > 0) {
-        toggleBalanceo(true); // Activa la animación
+        toggleBalanceo(true);
       }
     }
-  }, [cart, getTotalProducts, toggleBalanceo, toggleOffcanvas, isVisible]); // Escucha cambios en el carrito
+  }, [cart, getTotalProducts, toggleBalanceo, toggleOffcanvas]); // Escucha cambios en el carrito
 
   // Filtrar productos por talla seleccionada
   const filteredProducts = useMemo(() => {

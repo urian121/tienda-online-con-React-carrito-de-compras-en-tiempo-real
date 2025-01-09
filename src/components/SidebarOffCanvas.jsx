@@ -40,7 +40,7 @@ const SidebarOffCanvas = () => {
         <button
           type="button"
           className="btn-close"
-          onClick={() => toggleOffcanvas(!true)}
+          onClick={toggleOffcanvas}
           aria-label="Close"
         ></button>
       </div>

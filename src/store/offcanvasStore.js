@@ -1,12 +1,10 @@
 import { create } from "zustand";
 
 const useOffcanvasStore = create((set) => ({
-  isVisible: false, // Estado inicial de la visibilidad
-
-  // Función para alternar o establecer explícitamente el estado
-  toggleOffcanvas: (state) =>
-    set((currentState) => ({
-      isVisible: typeof state === "boolean" ? state : !currentState.isVisible,
+  isVisible: false,
+  toggleOffcanvas: () =>
+    set((state) => ({
+      isVisible: !state.isVisible,
     })),
 }));
 
