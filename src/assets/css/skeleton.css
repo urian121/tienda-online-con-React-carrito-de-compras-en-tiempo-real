@@ -1,0 +1,156 @@
+    .skeleton {
+      background: #eee;
+      background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+      background-size: 200% 100%;
+      animation: shine 1.5s linear infinite;
+    }
+
+    @keyframes shine {
+      to {
+        background-position-x: -200%;
+      }
+    }
+
+    .page-container {
+      display: flex;
+      gap: 24px;
+      padding: 20px;
+      flex-direction: column;
+    }
+
+    @media (min-width: 992px) {
+      .page-container {
+        flex-direction: row;
+      }
+    }
+
+    /* Size Selector Styles */
+    .size-selector {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 992px) {
+      .size-selector {
+        width: 180px; /* Ajustado para dos columnas */
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .size-title {
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .title-skeleton {
+      height: 24px;
+      width: 90px; /* Ajustado para "Tallas disp" */
+    }
+
+    .count-skeleton {
+      height: 24px;
+      width: 60px;
+    }
+
+    /* Actualización principal: grid de 2 columnas */
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      max-width: 180px;
+    }
+
+    @media (min-width: 576px) and (max-width: 991px) {
+      .size-grid {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: none;
+      }
+    }
+
+    .size-circle {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    /* Resto de los estilos para los productos se mantienen igual */
+    .product-grid {
+      flex-grow: 1;
+    }
+
+    .card-skeleton {
+      border-radius: 8px;
+      overflow: hidden;
+      height: 100%;
+      border: none;
+    }
+
+    .image-skeleton {
+      width: 100%;
+      padding-top: 125%;
+      position: relative;
+    }
+
+    .shipping-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      height: 24px;
+      width: 80px;
+      border-radius: 4px;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .title-skeleton-card {
+      height: 24px;
+      width: 80%;
+      margin: 10px 0;
+    }
+
+    .price-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin: 8px 0;
+      flex-wrap: wrap;
+    }
+
+    .price-skeleton {
+      height: 20px;
+      width: 60px;
+    }
+
+    .installment-skeleton {
+      height: 20px;
+      width: 100px;
+    }
+
+    .sizes-skeleton {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .size-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .button-skeleton {
+      height: 40px;
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 12px;
+    }

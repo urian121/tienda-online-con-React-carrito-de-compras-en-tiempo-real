@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useCartStore from "./store/cartStore";
 import useOffcanvasStore from "./store/offcanvasStore";
 import useTotalStore from "./store/totalProductStore";
@@ -12,6 +12,7 @@ import SidebarOffCanvas from "./components/SidebarOffCanvas";
 import SizeFilter from "./components/SizeFilter";
 import useFetch from "./hooks/useFetch"; // Importar el custom hook
 import TitleTypeWriter from "./components/TitleTypeWriter";
+import SizeFilterSkeleton from "./components/SizeFilterSkeleton";
 
 const App = () => {
   // Llama a `useCartStore` para acceder al estado del carrito y las funciones
@@ -24,8 +25,15 @@ const App = () => {
   // Usar el hook useFetch para obtener los productos
   const { data: products, loading, error } = useFetch("/json/products.json");
 
-  // UseEffect para manejar el estado de balanceo
+  // Estado para simular carga mínima
+  const [isSimulatedLoading, setIsSimulatedLoading] = useState(true);
+
+  // UseEffect para manejar el estado de balanceo y la carga mínima
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsSimulatedLoading(false); // Desactiva la carga simulada después de 3 segundos
+    }, 1000);
+
     if (cart.length > 0) {
       const totalProductsBalanceo = getTotalProducts(cart); // Calcula los productos únicos
       // Abre el carrito solo si no está visible
@@ -37,8 +45,12 @@ const App = () => {
       if (totalProductsBalanceo > 0) {
         toggleBalanceo(true);
       }
+
+      return () => clearTimeout(timer); // Limpiar el temporizador al desmontar el componente
     }
-  }, [cart, getTotalProducts, toggleBalanceo, toggleOffcanvas]); // Escucha cambios en el carrito
+
+    return () => clearTimeout(timer); // Limpiar el temporizador al desmontar el componente
+  }, [cart, getTotalProducts, toggleBalanceo, toggleOffcanvas]);
 
   // Filtrar productos por talla seleccionada
   const filteredProducts = useMemo(() => {
@@ -68,25 +80,30 @@ const App = () => {
         <TitleTypeWriter />
 
         <div className="row">
-          {/* Columna del Filtro */}
-          <div className="col-md-2">
-            <SizeFilter products={products} totalFiltered={totalFiltered} />
-          </div>
-
-          {/* Columna de Productos */}
-          <div className="col-md-10">
-            {loading ? (
-              <h2 className="text-center">Cargando productos...</h2>
-            ) : error ? (
-              <h2 className="text-center">
+          {loading || isSimulatedLoading ? (
+            <SizeFilterSkeleton />
+          ) : error ? (
+            <div className="col-12">
+              <h2 className="text-center text-danger">
                 Error cargando productos: {error.message}
               </h2>
-            ) : filteredProducts.length > 0 ? (
-              <ProductsList products={filteredProducts} />
-            ) : (
-              <p className="text-center">No hay productos.</p>
-            )}
-          </div>
+            </div>
+          ) : filteredProducts.length > 0 ? (
+            <>
+              {/* Columna del filtro */}
+              <div className="col-md-2">
+                <SizeFilter products={products} totalFiltered={totalFiltered} />
+              </div>
+              {/* Columna de productos */}
+              <div className="col-md-10">
+                <ProductsList products={filteredProducts} />
+              </div>
+            </>
+          ) : (
+            <div className="col-12">
+              <p className="text-center">No hay productos disponibles.</p>
+            </div>
+          )}
         </div>
       </div>
 
